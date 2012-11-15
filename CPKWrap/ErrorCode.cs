@@ -1,0 +1,114 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace CPKWrap
+{
+    public class ErrorCode
+    {
+        public static Dictionary<int,string> codeDic = new Dictionary<int,string>();
+        static ErrorCode()
+        {
+            codeDic.Add(0,"执行成功");
+            codeDic.Add(1001,"CLA错误0x6E00");
+            codeDic.Add(1002,"INS错误0x6D00");
+			codeDic.Add(1003,"COS读取数据失败");
+			codeDic.Add(1004,"COS写数据失败0x6581");
+			codeDic.Add(1006,"空间不足0x6A84");
+			codeDic.Add(1007,"P1 P2参数错误0x6A86");
+			codeDic.Add(1008,"功能不支持0x6A81");
+			codeDic.Add(1009,"使用条件不满足0x6985");
+			codeDic.Add(1010,"数据空间不足");
+			codeDic.Add(1011,"数据域参数错误0x6A80");
+			codeDic.Add(1012,"不满足安全状态0x6982");
+			codeDic.Add(1013,"数据通讯错误");
+			codeDic.Add(1014,"外部认证失败");
+			codeDic.Add(1015,"安全报文数据项不正确");
+			codeDic.Add(1016,"数据长度错误");
+			codeDic.Add(1017,"未取随机数0x6984");
+			codeDic.Add(1018,"缓冲区不足");
+			codeDic.Add(1019,"LE错误0x6CXX");
+			codeDic.Add(2000,"设备ID错误");
+			codeDic.Add(2001,"设备打开失败");
+			codeDic.Add(2002,"设备关闭失败");
+			codeDic.Add(2003,"设备未打开");
+			codeDic.Add(2004,"连接读卡器失败");
+			codeDic.Add(3001,"PIN码类型错");
+			codeDic.Add(3002,"PIN码校验错");
+			codeDic.Add(3003,"PIN码长度错");
+			codeDic.Add(3004,"认证方式锁定0x6983");
+			codeDic.Add(4001,"文件不存在0x6A82");
+			codeDic.Add(4002,"文件已存在0x6A80");
+			codeDic.Add(4003,"文件类型错0x6981");
+			codeDic.Add(4004,"文件偏移错");
+			codeDic.Add(4005,"已达文件最大数");
+			codeDic.Add(4006,"文件控制信息错误");
+			codeDic.Add(4007,"文件标识与文件类型不匹配");
+			codeDic.Add(4008,"数据超过文件设定长度");
+			codeDic.Add(4009,"分配的空间不足");
+			codeDic.Add(4010,"文件名错误");
+			codeDic.Add(5001,"密钥不匹配");
+			codeDic.Add(5002,"私钥长度错");
+			codeDic.Add(5003,"私钥ID码错");
+			codeDic.Add(5004,"私钥ID所指无私钥");
+			codeDic.Add(5005,"随机数长度错误");
+			codeDic.Add(5006,"授权生产密钥个数已完");
+			codeDic.Add(5101,"签名内容长度错");
+			codeDic.Add(6001,"没有软件授权");
+			codeDic.Add(6002,"授权过期");
+			codeDic.Add(6003,"超过续费周期");
+			codeDic.Add(7001,"TF Card没有找到");
+			codeDic.Add(7002,"TF Card未初始化");
+			codeDic.Add(7003,"TF Card写错误");
+			codeDic.Add(7004,"TF Card读错误");
+			codeDic.Add(7005,"TF Card超时");
+			codeDic.Add(11001,"参数无效");
+			codeDic.Add(11002,"无效证书");
+			codeDic.Add(11003,"公钥矩阵不匹配");
+			codeDic.Add(11004,"算法无效");
+			codeDic.Add(11005,"无效密文数据");
+			codeDic.Add(11006,"打开文件失败");
+			codeDic.Add(11007,"文件已经存在");
+			codeDic.Add(11008,"矩阵文件不存在");
+			codeDic.Add(11009,"删除文件错误");
+			codeDic.Add(11010,"文件重命名错误");
+			codeDic.Add(12001,"申请内存失败");
+			codeDic.Add(12002,"CPK版本错误");
+			codeDic.Add(12003,"数据长度错误");
+			codeDic.Add(12004,"摘要信息长度错误");
+			codeDic.Add(12005,"格式转换错误");
+			codeDic.Add(12006,"消息码认证失败");
+			codeDic.Add(12007,"新建证书结构对象失败");
+			codeDic.Add(12008,"内存溢出或分配的内存太小");
+			codeDic.Add(13001,"得到映射算法错误");
+			codeDic.Add(13002,"得到私钥失败");
+			codeDic.Add(13003,"得到加密算法");
+			codeDic.Add(13004,"得到交换密钥失败");
+			codeDic.Add(14001,"HASH运算错误");
+			codeDic.Add(14002,"加密失败");
+			codeDic.Add(14003,"解密失败");
+			codeDic.Add(14004,"签名失败");
+			codeDic.Add(14005,"验证签名失败");
+			codeDic.Add(14006,"伴随公钥错误");
+			codeDic.Add(14007,"伴随签名验证失败");
+			codeDic.Add(14008,"密钥标识错误");
+			codeDic.Add(14009,"矩阵标识错误");
+			codeDic.Add(14010,"加密文件版本错误");
+			codeDic.Add(15001,"大整数类型转换错误");
+			codeDic.Add(15002,"新建大整数失败");
+			codeDic.Add(15003,"生成随机大整数失败");
+			codeDic.Add(15004,"大整数求逆失败");
+			codeDic.Add(16001,"椭圆曲线点格式错误");
+			codeDic.Add(16002,"椭圆曲线点格式转换失败");
+			codeDic.Add(16003,"新建椭圆曲线点失败");
+			codeDic.Add(16004,"点乘失败");
+			codeDic.Add(16005,"得到order失败");
+			codeDic.Add(16006,"得到EC_GROUP错误");
+			codeDic.Add(16007,"新建椭圆曲线KEY失败");
+			codeDic.Add(16008,"EC_KEY参数设置失败");
+			codeDic.Add(16009,"EC_DSA签名长度错误");
+			codeDic.Add(16010,"椭圆曲线不同");
+        }
+    }
+}

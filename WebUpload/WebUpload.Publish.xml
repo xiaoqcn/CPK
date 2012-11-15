@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="F:\FD\CPK\WebSite" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="配置文件1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="Web.config" publishTime="11/13/2012 14:14:11" />
+    <file relUrl="bin/WebUpload.pdb" publishTime="11/13/2012 13:23:47" />
+    <file relUrl="js/jquery-1.3.2.min.js" publishTime="10/31/2012 16:52:36" />
+    <file relUrl="bin/CPKWrap.dll" publishTime="11/13/2012 09:35:43" />
+    <file relUrl="Safe/ServerSave.aspx" publishTime="11/06/2012 16:09:15" />
+    <file relUrl="js/FileLister.js" publishTime="11/09/2012 14:12:13" />
+    <file relUrl="Default.aspx" publishTime="11/08/2012 17:33:32" />
+    <file relUrl="Safe/ServerDecode.aspx" publishTime="11/06/2012 22:51:35" />
+    <file relUrl="OP/UploadFile.ashx" publishTime="10/31/2012 17:18:11" />
+    <file relUrl="css/HttpUploader.css" publishTime="11/12/2012 09:42:45" />
+    <file relUrl="bin/CPKWrap.pdb" publishTime="11/13/2012 09:35:43" />
+    <file relUrl="Safe/ServerAddress.ashx" publishTime="11/06/2012 16:10:25" />
+    <file relUrl="js/FaDun.js" publishTime="11/13/2012 13:07:15" />
+    <file relUrl="Safe/ClientEncode.aspx" publishTime="11/06/2012 16:39:49" />
+    <file relUrl="Safe/ClientGetKey.aspx" publishTime="11/06/2012 17:38:19" />
+    <file relUrl="js/combinbox.js" publishTime="11/12/2012 17:38:04" />
+    <file relUrl="js/HttpUploader.js" publishTime="11/13/2012 13:48:24" />
+    <file relUrl="ReceiveFileBlock.ashx" publishTime="10/29/2012 11:50:13" />
+    <file relUrl="bin/WebUpload.dll" publishTime="11/13/2012 13:23:48" />
+  </publishProfile>
+</publishData>
