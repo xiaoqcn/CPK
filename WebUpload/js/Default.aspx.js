@@ -1,6 +1,5 @@
 ﻿function Submit() {
     document.getElementById("signInfo").value = "";
-    var type = 0;
     var pin = document.getElementById("pin").value;
     document.getElementById("pin").value = "";
     var signData = document.getElementById("signData").value;

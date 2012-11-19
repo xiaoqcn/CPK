@@ -61,15 +61,15 @@ namespace WebUpload
             FileStream fs_read = File.Open(path, FileMode.Open, FileAccess.Read);
             FileStream fs_write = File.Open(path_enc, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read);
 
-            int dataBufferLen = 128 * 1024;
+            int dataBufferLen = 64 * 1024;
             byte[] dataBuffer = new byte[dataBufferLen];
-            int encodeBufferLen = 128 * 1024+16;
+            int encodeBufferLen = 64 * 1024+16;
             byte[] encodeBuffer = new byte[encodeBufferLen];
 
             int readLen = 0;
             while ((readLen = fs_read.Read(dataBuffer, 0, dataBuffer.Length)) != 0)
             {
-                rv = CPKWrap.libcpkapi.Sym_Encrypt("AES-256-CBC", dataBuffer, readLen, key, key.Length, encodeBuffer, ref encodeBufferLen);
+                rv = CPKWrap.libcpkapi.Sym_Encrypt("AES-256-ECB", dataBuffer, readLen, key, key.Length, encodeBuffer, ref encodeBufferLen);
                 if (rv != 0)
                 {
                     return string.Empty;
@@ -91,15 +91,15 @@ namespace WebUpload
             FileStream fs_read = File.Open(path_enc, FileMode.Open, FileAccess.Read, FileShare.Read);
             FileStream fs_write = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write);
 
-            int encodeBufferLen = 128 * 1024+16;
+            int encodeBufferLen = 64 * 1024+16;
             byte[] encodeBuffer = new byte[encodeBufferLen];
-            int dataBufferLen = 128 * 1024;
+            int dataBufferLen = 64 * 1024;
             byte[] dataBuffer = new byte[dataBufferLen];
 
             int readLen = 0;
             while ((readLen = fs_read.Read(encodeBuffer, 0, encodeBuffer.Length)) != 0)
             {
-                rv = CPKWrap.libcpkapi.Sym_Decrypt("AES-256-CBC", encodeBuffer, readLen, key, key.Length, dataBuffer, ref dataBufferLen);
+                rv = CPKWrap.libcpkapi.Sym_Decrypt("AES-256-ECB", encodeBuffer, readLen, key, key.Length, dataBuffer, ref dataBufferLen);
                 if (rv != 0)
                 {
                     break;
@@ -127,6 +127,7 @@ namespace WebUpload
         public static string GenEnvelope(string id,string matrixpath, string dataStr)
         {
             var address = System.Text.Encoding.ASCII.GetBytes(id);
+            dataStr = dataStr.Replace("\r\n","");
             var data = Convert.FromBase64String(dataStr);
             
             int bufferLen = 512;
@@ -146,6 +147,7 @@ namespace WebUpload
         /// <returns>信封内容（base64无换行）</returns>
         public static string OpenEnvelope(string envelope)
         {
+            envelope = envelope.Replace("\r\n", "");
             byte[] envelopeBuffer = Convert.FromBase64String(envelope);
 
             int bufferLen = 512;
@@ -259,6 +261,7 @@ namespace WebUpload
             {
                 return string.Empty;
             }
+            keyStr = keyStr.Replace("\r\n","");
             byte[] key = Convert.FromBase64String(keyStr);
             #endregion
 
@@ -272,8 +275,8 @@ namespace WebUpload
 
         public static void Log(string k,string v)
         {
-            string fmt = string.Format("{0}:{1}\r\n", k, v);
-            File.AppendAllText(@"D:\123.txt", fmt);
+            //string fmt = string.Format("{0}:{1}\r\n", k, v);
+            //File.AppendAllText(@"D:\123.txt", fmt);
         }
     }
 }

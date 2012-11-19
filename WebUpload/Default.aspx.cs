@@ -102,8 +102,8 @@ namespace WebUpload
                 R("验证签名", CPKWrap.ErrorCode.codeDic[rn]);
                 return;
             }
-
             R("验证签名", CPKWrap.ErrorCode.codeDic[rn]);
+            Response.Redirect("Upload.aspx");
         }
 
         //生成签名数据--无中间件时的测试方法
@@ -171,9 +171,8 @@ namespace WebUpload
 
         protected void Logon_Click(object sender, EventArgs e)
         {
-            var signInfo = GenSignInfo();// Request["signInfo"];
-            var ss = GenSignInfo();
-            var kk = Request["signInfo"];
+            var signInfo =  Request["signInfo"];//GenSignInfo();//
+            signInfo = signInfo.Replace("\r\n", "");
             if (string.IsNullOrWhiteSpace(signInfo))
             {
                 return;

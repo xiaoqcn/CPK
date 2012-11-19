@@ -23,6 +23,8 @@ namespace WebUpload
             return dir + fileName;
         }
 
+        public static string matrix = "/matrix/cguard.cn.pkm"; 
+
         public void ProcessRequest(HttpContext context)
         {
             log(context);
@@ -46,8 +48,8 @@ namespace WebUpload
             }
             Save(context);
             string[] ranges = range.Split('-');
-            var start = int.Parse(ranges[0]);
-            //var end = int.Parse(ranges[1]);
+            var start = long.Parse(ranges[0]);
+            var end = long.Parse(ranges[1]);
             //var count = end -start+1;
             if (postfile.InputStream.Length <= 0)
             {
@@ -64,6 +66,18 @@ namespace WebUpload
                 fs.Write(byteArr, 0, byteArr.Length);
                 fs.Flush();
                 fs.Close();
+                if (end == long.Parse(lenth))
+                { 
+                    var e_sign = context.Request["e-sign"];
+                    e_sign = e_sign.Replace("\r\n","");
+                    var e_signByte = Convert.FromBase64String(e_sign);
+                    if (CPKWrap.libcpkapi.CPK_Verify_File(context.Server.MapPath(matrix), path, e_signByte, e_signByte.Length) != 0)
+                    {
+                        context.Response.StatusCode = 501;//验证签名失败;文件损坏，重传
+                        context.Response.Write("验证签名失败;文件损坏，重传");
+                        return;
+                    }
+                }
             }
             catch {
                 context.Response.StatusCode = 500;

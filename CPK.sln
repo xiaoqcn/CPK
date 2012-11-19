@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUpload", "WebUpload\WebU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUploadHelper", "WebUploadHelper\WebUploadHelper.csproj", "{50309A50-ED94-4DEC-8860-1EDF300835F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeApp", "ChromeApp\ChromeApp.csproj", "{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPKWrap", "CPKWrap\CPKWrap.csproj", "{046FA151-38D0-4A8E-997B-82127FDB3300}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{116E5724-C9FA-4CFC-A37A-49FD152EDB9C}"
@@ -14,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{116E5724-C9F
 		Lib\libcpkapi.dll = Lib\libcpkapi.dll
 		Lib\libeay32.dll = Lib\libeay32.dll
 		Lib\libscard.dll = Lib\libscard.dll
+		Lib\libtcard.dll = Lib\libtcard.dll
 		Lib\libukey.dll = Lib\libukey.dll
 		Lib\System.Data.SQLite.dll = Lib\System.Data.SQLite.dll
 	EndProjectSection
@@ -54,18 +53,6 @@ Global
 		{50309A50-ED94-4DEC-8860-1EDF300835F2}.Release|Win32.ActiveCfg = Release|x86
 		{50309A50-ED94-4DEC-8860-1EDF300835F2}.Release|x86.ActiveCfg = Release|x86
 		{50309A50-ED94-4DEC-8860-1EDF300835F2}.Release|x86.Build.0 = Release|x86
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Release|Win32.ActiveCfg = Release|Any CPU
-		{78ECEC4C-14FB-46E8-9DB9-B31468A09D7F}.Release|x86.ActiveCfg = Release|Any CPU
 		{046FA151-38D0-4A8E-997B-82127FDB3300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{046FA151-38D0-4A8E-997B-82127FDB3300}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{046FA151-38D0-4A8E-997B-82127FDB3300}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

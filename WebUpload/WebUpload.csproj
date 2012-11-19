@@ -53,6 +53,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FileList.aspx" />
     <Content Include="FileUnpack.aspx" />
     <Content Include="js\FDUpload\css\HttpUploader.css" />
     <Content Include="Default.aspx" />
@@ -61,10 +62,6 @@
     <Content Include="js\FDUpload\FileLister.js" />
     <Content Include="js\FDUpload\HttpUploader.js" />
     <Content Include="js\FDUpload\jquery-1.3.2.min.js" />
-    <Content Include="Safe\ClientEncode.aspx" />
-    <Content Include="Safe\ClientGetKey.aspx" />
-    <Content Include="Safe\ServerDecode.aspx" />
-    <Content Include="Safe\ServerSave.aspx" />
     <Content Include="Upload.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -82,6 +79,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FileList.aspx.cs">
+      <DependentUpon>FileList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FileList.aspx.designer.cs">
+      <DependentUpon>FileList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FilePack.cs" />
     <Compile Include="FileUnpack.aspx.cs">
       <DependentUpon>FileUnpack.aspx</DependentUpon>
@@ -91,43 +95,12 @@
       <DependentUpon>FileUnpack.aspx</DependentUpon>
     </Compile>
     <Compile Include="SQLiteHelper.cs" />
-    <Compile Include="OP\UploadFile.ashx.cs">
-      <DependentUpon>UploadFile.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceiveFileBlock.ashx.cs">
       <DependentUpon>ReceiveFileBlock.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Safe\ClientEncode.aspx.cs">
-      <DependentUpon>ClientEncode.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Safe\ClientEncode.aspx.designer.cs">
-      <DependentUpon>ClientEncode.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Safe\ClientGetKey.aspx.cs">
-      <DependentUpon>ClientGetKey.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Safe\ClientGetKey.aspx.designer.cs">
-      <DependentUpon>ClientGetKey.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Safe\ServerAddress.ashx.cs">
       <DependentUpon>ServerAddress.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Safe\ServerDecode.aspx.cs">
-      <DependentUpon>ServerDecode.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Safe\ServerDecode.aspx.designer.cs">
-      <DependentUpon>ServerDecode.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Safe\ServerSave.aspx.cs">
-      <DependentUpon>ServerSave.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Safe\ServerSave.aspx.designer.cs">
-      <DependentUpon>ServerSave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Upload.aspx.cs">
       <DependentUpon>Upload.aspx</DependentUpon>
@@ -144,9 +117,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="OP\UploadFile.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Safe\ServerAddress.ashx" />

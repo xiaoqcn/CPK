@@ -35,44 +35,5 @@ namespace WebUpload
             }
             return result;
         }
-
-        public static DataTable ExecuteTable(string sql, SQLiteConnectionStringBuilder connStrBuilder)
-        {
-            DataTable dt = null;
-            using (System.Data.SQLite.SQLiteConnection conn = new System.Data.SQLite.SQLiteConnection())
-            using (System.Data.SQLite.SQLiteCommand cmd = new System.Data.SQLite.SQLiteCommand())
-            using(SQLiteDataAdapter da = new SQLiteDataAdapter())
-            {
-                conn.ConnectionString = connStrBuilder.ToString();
-                conn.Open();
-
-                cmd.Connection = conn;
-                da.SelectCommand = cmd;
-
-                //string sql = "INSERT INTO people(pid,name,nickname) VALUES(null,'{0}','{1}')";
-                //sql = string.Format(sql, name, nickname);
-
-                cmd.CommandText = sql;
-                dt = new DataTable();
-                da.Fill(dt);
-            }
-            return dt;
-        }
-
-        public static int ExecuteScaler(string sql, SQLiteConnectionStringBuilder connStrBuilder)
-        {
-            int result = -1;
-            using (System.Data.SQLite.SQLiteConnection conn = new System.Data.SQLite.SQLiteConnection())
-            using (System.Data.SQLite.SQLiteCommand cmd = new System.Data.SQLite.SQLiteCommand())
-            {
-                conn.ConnectionString = connStrBuilder.ToString();
-                conn.Open();
-
-                cmd.Connection = conn;
-                cmd.CommandText = sql;
-                result = (int)cmd.ExecuteScalar();
-            }
-            return result;
-        }
     }
 }

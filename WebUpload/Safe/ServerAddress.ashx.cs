@@ -14,7 +14,6 @@ namespace WebUpload.Safe
         public void RW(HttpContext context,string msg)
         { 
             context.Response.ContentType = "text/plain";
-            //context.Response.ContentEncoding = System.Text.Encoding.ASCII;
             context.Response.Write(msg);
         }
 

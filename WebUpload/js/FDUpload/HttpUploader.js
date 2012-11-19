@@ -38,6 +38,7 @@ function HttpUploaderMgr()
 	this.UploaderList = new Object(); //上传项列表
 	this.UploadIdList = new Array(); //正在上传的ID列表
 	this.CompleteList = new Array(); //已上传完的HttpUploader列表
+	this.AVXState = ControlState.UPLOAD_FILE_STOP;
 	
 	//初始化路径
 	this.InitPath = function()
@@ -136,12 +137,15 @@ function HttpUploaderMgr()
 	    this.AVX.SetUploadUrl(this.Config["UrlPost"]);
 	    this.AVX.SetSelectFileMaxSize(this.Config["FileSizeLimit"]);
 	    this.AVX.EnableEncryptFile(this.Config["IsEncrypt"]);
-	    //var rv = this.AVX.CPKOpenDevice(1, "11111111");
 	    //选中文件
 	    HttpUploaderMgrInstance.AVX.attachEvent("OnSelectFile", function (file, size) {
 	        mgr.AddFile(file, size);
 	    });
-	    //文件块上传完成
+	    //文件加密
+	    HttpUploaderMgrInstance.AVX.attachEvent("OnEncryptFile", function (File, USize, Error) {
+	        HttpUploader_EncryptFile(File, USize, Error);
+	    });
+	    //文件块上传
 	    HttpUploaderMgrInstance.AVX.attachEvent("OnHttpUpload", function (File, USize, Error) {
 	        HttpUploader_Process(File, USize, Error);
 	    });
@@ -212,6 +216,11 @@ function HttpUploaderMgr()
 
 	//添加一个上传ID
 	this.AppendUploadId = function (fid) {
+	    for (var i = 0; i < this.UploadIdList.length; i++) {
+	        if (this.UploadIdList[i] == fid) {
+	            return;
+	        }
+	    }
 	    this.UploadIdList.push(fid);
 	};
 
@@ -219,17 +228,14 @@ function HttpUploaderMgr()
 	从当前上传ID列表中删除指定项。
 	此函数将会重新构造一个Array
 	*/
-	this.RemoveUploadId = function(fid)
-	{
-		if (this.UploadIdList.length < 1) return;
-		
-		for (var i = 0, l = this.UploadIdList.length; i < l; ++i)
-		{
-			if (this.UploadIdList[i] == fid)
-			{
-				this.UploadIdList.remove(fid);
-			}
-		}
+	this.RemoveUploadId = function (fid) {
+	    if (this.UploadIdList.length < 1) return;
+
+	    for (var i = 0, l = this.UploadIdList.length; i < l; ++i) {
+	        if (this.UploadIdList[i] == fid) {
+	            this.UploadIdList.remove(fid);
+	        }
+	    }
 	};
 
 	//停止所有上传项
@@ -507,6 +513,7 @@ function MgrBtnClick() {
             HttpUploaderMgrInstance.StopAll();
             break;
     }
+    return false;
 }
 
 //单击控制按钮
@@ -550,7 +557,8 @@ var HttpUploaderState = {
 	Complete: 5,
 	WaitContinueUpload: 6,
 	None: 7,
-	Waiting: 8
+	Waiting: 8,
+    Encrypted:9
 };
 
 var ControlState = {
@@ -626,6 +634,45 @@ function HttpUploader_Complete(obj) {
 	obj.Manager.RemoveUploadId(obj.FileID);
 }
 
+//加密完成
+function HttpUploader_Encrypted(obj) {
+
+    obj.pButton.style.display = "none";
+    obj.pProcess.style.width = "100%";
+    obj.pPercent.innerText = "100%";
+    obj.pMsg.innerText = "加密完成";
+    obj.State = HttpUploaderState.Encrypted;
+}
+
+//加密回调
+function HttpUploader_EncryptFile(File, Size, USize) {
+    if (Size < 0) {
+        Size = Size >>> 0;
+    }
+    if (USize < 0) {
+        USize = USize >>> 0;
+    }
+    var percent = (parseFloat(USize) / parseFloat(Size)).toFixed(2) * 100 + "%";
+    //var speed = 0;
+    //var times = 0;
+    var obj = null;
+    for (a in HttpUploaderMgrInstance.UploaderList) {
+        if (HttpUploaderMgrInstance.UploaderList[a].LocalFile == File) {
+            obj = HttpUploaderMgrInstance.UploaderList[a];
+        }
+    }
+    if (!obj) {
+        return;
+    }
+    obj.pPercent.innerText = percent;
+    obj.pProcess.style.width = percent;
+    var str = "已加密:" + CalSize(USize); // + " 速度:" + speed + "/S 剩余时间:" + times;
+    obj.pMsg.innerText = str;
+    if (obj.FileLength == USize) {
+        HttpUploader_Complete(obj);
+    }
+}
+
 //传输进度。频率为每秒调用一次
 function HttpUploader_Process(File,Size,USize)//obj, speed, postedLength, percent, times)
 {
@@ -652,7 +699,8 @@ function HttpUploader_Process(File,Size,USize)//obj, speed, postedLength, percen
 	obj.pProcess.style.width = percent;
 	var str = "已上传:" + CalSize(USize);// + " 速度:" + speed + "/S 剩余时间:" + times;
 	obj.pMsg.innerText = str;
-	if (obj.FileLength == USize) {
+	obj.FileLength = Size;
+	if (Size == USize) {
 	    HttpUploader_Complete(obj);
     }
 }
@@ -668,6 +716,7 @@ function HttpUploader_Process(File,Size,USize)//obj, speed, postedLength, percen
 	,HUS_Md5Complete	=7	//MD5计算完毕
 */
 function HttpUploader_StateChanged(state) {
+    HttpUploaderMgrInstance.AVXState = state;
     var obj = document.getElementById("lnkMgrBtn");
 	switch(state)
 	{
@@ -680,7 +729,8 @@ function HttpUploader_StateChanged(state) {
 	    case ControlState.UPLOAD_FILE_PAUSE:
 	        obj.innerText = "上传";
 			break;
-	}
+    }
+    return false;
 }
 
 function CalSize(size) {
